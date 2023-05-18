@@ -21,6 +21,12 @@ class _MyAppState extends State<MyApp> {
     "Ella te ama",
   ];
 
+  List<bool> answers = [
+    true,
+    false,
+    false,
+  ];
+
     int questionNumber =0;
 
   @override
@@ -53,11 +59,19 @@ class _MyAppState extends State<MyApp> {
                     color: Colors.greenAccent,
                     child: Text("Verdadero"),
                     onPressed: (){
+
+                      bool correctAnswer = answers[questionNumber];
                       questionNumber++;
-                      scoreKeeper.add(Icon(Icons.check,color: Colors.greenAccent,),);
+                      if (correctAnswer==true){
+                        scoreKeeper.add(Icon(Icons.check,color: Colors.greenAccent,),);
+                      }else{
+                        scoreKeeper.add(Icon(Icons.close,color: Colors.redAccent),);
+                      }
                       setState(() {
 
                       });
+
+                      //print(correctAnswer);
                       },
                   ),
                 ),
