@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_codigo4_quizz_v2/question_model.dart';
+import 'package:flutter_codigo4_quizz_v2/quiz_brain.dart';
 
 void main() {
   runApp( MyApp());
@@ -16,14 +17,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   List<Icon> scoreKeeper =[];
 
-  List<Question> questions =[
-    Question(questionText: "El hombre llego a la luna?", questionAnswer: true),
-    Question(questionText: "La tierra es plana?", questionAnswer: false),
-    Question(questionText: "Ella te ama?", questionAnswer: false),
-    Question(questionText: "Desayunaste?", questionAnswer: true),
-  ];
+  QuizBrain mandarina = QuizBrain();
 
-    int questionNumber =0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +34,7 @@ class _MyAppState extends State<MyApp> {
                 flex: 5,
                 child: Center(
                   child: Text(
-                    questions[questionNumber].questionText,
+                    mandarina.getQuestionText(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -56,8 +52,9 @@ class _MyAppState extends State<MyApp> {
                     child: Text("Verdadero"),
                     onPressed: (){
 
-                      bool correctAnswer = questions[questionNumber].questionAnswer;
-                      questionNumber++;
+                      bool correctAnswer = mandarina.getQuestionAnswer();
+                      mandarina.nextQuestion();
+
                       if (correctAnswer==true){
                         scoreKeeper.add(Icon(Icons.check,color: Colors.greenAccent,),);
                       }else{
@@ -81,7 +78,7 @@ class _MyAppState extends State<MyApp> {
                     color: Colors.redAccent,
                     child: Text("Falso"),
                     onPressed: (){
-                      questionNumber++;
+
                       scoreKeeper.add(Icon(Icons.close,color: Colors.redAccent),);
                       setState(() {
 
