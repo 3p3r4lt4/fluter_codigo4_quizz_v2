@@ -19,6 +19,20 @@ class _MyAppState extends State<MyApp> {
 
   QuizBrain mandarina = QuizBrain();
 
+  void checkAnswer(bool userPickAnswer){
+    bool correctAnswer = mandarina.getQuestionAnswer();
+    mandarina.nextQuestion();
+
+    if (correctAnswer==userPickAnswer){
+      scoreKeeper.add(Icon(Icons.check,color: Colors.greenAccent,),);
+    }else{
+      scoreKeeper.add(Icon(Icons.close,color: Colors.redAccent),);
+    }
+    setState(() {
+
+    });
+  }
+
 
 
   @override
@@ -52,17 +66,7 @@ class _MyAppState extends State<MyApp> {
                     child: Text("Verdadero"),
                     onPressed: (){
 
-                      bool correctAnswer = mandarina.getQuestionAnswer();
-                      mandarina.nextQuestion();
-
-                      if (correctAnswer==true){
-                        scoreKeeper.add(Icon(Icons.check,color: Colors.greenAccent,),);
-                      }else{
-                        scoreKeeper.add(Icon(Icons.close,color: Colors.redAccent),);
-                      }
-                      setState(() {
-
-                      });
+                      checkAnswer(true);
 
                       //print(correctAnswer);
                       },
@@ -79,10 +83,7 @@ class _MyAppState extends State<MyApp> {
                     child: Text("Falso"),
                     onPressed: (){
 
-                      scoreKeeper.add(Icon(Icons.close,color: Colors.redAccent),);
-                      setState(() {
-
-                      });
+                      checkAnswer(false);
                     },
                   ),
                 ),

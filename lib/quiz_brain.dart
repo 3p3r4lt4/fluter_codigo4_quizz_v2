@@ -21,6 +21,9 @@ class QuizBrain{
   }
 
   nextQuestion(){
-    _questionNumber++;
+    if(_questionNumber < _questions.length -1){
+      _questionNumber++;
+    }
+
   }
 }
