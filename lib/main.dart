@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_codigo4_quizz_v2/question_model.dart';
 
 void main() {
   runApp( MyApp());
@@ -15,16 +16,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   List<Icon> scoreKeeper =[];
 
-  List<String> questions =[
-    "El hombre llego a la luna?",
-    "La tierra es plana?",
-    "Ella te ama",
-  ];
-
-  List<bool> answers = [
-    true,
-    false,
-    false,
+  List<Question> questions =[
+    Question(questionText: "El hombre llego a la luna?", questionAnswer: true),
+    Question(questionText: "La tierra es plana?", questionAnswer: false),
+    Question(questionText: "Ella te ama?", questionAnswer: false),
+    Question(questionText: "Desayunaste?", questionAnswer: true),
   ];
 
     int questionNumber =0;
@@ -42,7 +38,7 @@ class _MyAppState extends State<MyApp> {
                 flex: 5,
                 child: Center(
                   child: Text(
-                    questions[questionNumber],
+                    questions[questionNumber].questionText,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -60,7 +56,7 @@ class _MyAppState extends State<MyApp> {
                     child: Text("Verdadero"),
                     onPressed: (){
 
-                      bool correctAnswer = answers[questionNumber];
+                      bool correctAnswer = questions[questionNumber].questionAnswer;
                       questionNumber++;
                       if (correctAnswer==true){
                         scoreKeeper.add(Icon(Icons.check,color: Colors.greenAccent,),);
